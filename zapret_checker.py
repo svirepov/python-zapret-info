@@ -10,6 +10,7 @@ import zipfile
 from base64 import b64decode
 import json
 import xml.etree.ElementTree as etree
+import sys
 
 XML_FILE_NAME = "req_new.xml"
 P7S_FILE_NAME = "request.xml.sign"
@@ -65,9 +66,10 @@ if max(opener.getLastDumpDateEx().lastDumpDate, opener.getLastDumpDateEx().lastD
                 else:
                     #Если это любая другая ошибка, выводим ее и прекращаем работу
                     print 'Error: %s' % request['resultComment']
-                    break
+                    sys.exit(1)
     else:
         #Запрос не принят, возвращаем ошибку
         print 'Error: %s' % request['resultComment']
+        sys.exit(1)
 else:
     print 'No updates'
